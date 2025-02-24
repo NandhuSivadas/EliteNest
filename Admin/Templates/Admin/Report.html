@@ -1,0 +1,80 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Booking Report</h2>
+
+    <ul class="nav nav-tabs" id="reportTab">
+        <li class="nav-item">
+            <a class="nav-link active" id="paid-tab" data-bs-toggle="tab" href="#paid">Paid Bookings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="not-paid-tab" data-bs-toggle="tab" href="#not-paid">Not Paid Bookings</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3">
+        <!-- Paid Bookings -->
+        <div class="tab-pane fade show active" id="paid">
+            <h4>Paid Bookings</h4>
+            <table class="table table-bordered table-striped">
+                <thead class="table-success">
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>House</th>
+                        <th>Booking Amount</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in paid_bookings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ booking.user.user_name }}</td>
+                        <td>{{ booking.house.house_title }}</td>
+                        <td>{{ booking.booking_amount }}</td>
+                        <td>{{ booking.booking_date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No paid bookings found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Not Paid Bookings -->
+        <div class="tab-pane fade" id="not-paid">
+            <h4>Not Paid Bookings</h4>
+            <table class="table table-bordered table-striped">
+                <thead class="table-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>House</th>
+                        <th>Booking Amount</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in unpaid_bookings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ booking.user.user_name  }}</td>
+                        <td>{{booking.house.house_title }}</td>
+                        <td>{{ booking.booking_amount }}</td>
+                        <td>{{ booking.booking_date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No unpaid bookings found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

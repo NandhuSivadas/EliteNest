@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            margin-top: 50px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .email-otp-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .email-otp-container input[type="text"] {
+            flex-grow: 1;
+        }
+
+        .email-otp-container input[type="button"] {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="post" id="UserForm" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+        <h2>User Registration</h2>
+
+       
+      
+
+        <div class="form-group">
+            <label for="txt_name">Name</label>
+            <input type="text" name="txt_name" id="txt_name" class="form-control" pattern="[a-zA-Z ]{4,20}" title="Enter Correct Name" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txt_email">Email</label>
+            <div class="email-otp-container">
+                <input type="text" name="txt_email" id="txt_email" class="form-control">
+              
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            <label>Gender</label>
+            <div class="form-check">
+                <input type="radio" name="txt_gender" id="male" class="form-check-input" required>
+                <label for="male" class="form-check-label">Male</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="txt_gender" id="female" class="form-check-input">
+                <label for="female" class="form-check-label">Female</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txt_contact">Contact</label>
+            <input type="text" name="txt_contact" id="txt_contact" class="form-control" pattern="[0-9+
+            ]{10,13}" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="txt_address">Address</label>
+            <input type="text" name="txt_address" id="txt_address" class="form-control" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txt_password">Password</label>
+            <input type="password" name="txt_password" id="txt_password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txt_file">Image</label>
+            <input type="file" name="txt_photo" id="txt_file" class="form-control-file" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txt_proof">Proof</label>
+            <input type="file" name="txt_proof" id="txt_proof" class="form-control-file" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+
+    <!-- jQuery -->
+  
+</body>
+
+</html>

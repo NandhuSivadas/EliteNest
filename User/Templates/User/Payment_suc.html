@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    
+    <script type="text/javascript">
+        function preventBack() { 
+            window.history.forward(); 
+        }
+        setTimeout(preventBack, 0);
+        window.onunload = function () { null };
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .bg {
+            background-color: black;
+            width: 480px;
+            height: auto;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .card {
+            background-color: rgb(231, 228, 228);
+            width: 100%;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card__success {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #60c878;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid white;
+            font-size: 40px;
+            color: white;
+        }
+
+        .card__msg {
+            text-transform: uppercase;
+            color: #333;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+
+        .card__submsg {
+            color: #555;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .card__body {
+            background-color: #d90505;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .card__method {
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .card__payment {
+            background-color: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .card__credit-card {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .card__card-type {
+            text-transform: uppercase;
+            color: #232528;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card__tags {
+            margin-top: 20px;
+        }
+
+        .card__tag {
+            text-transform: uppercase;
+            background-color: #f8f6f6;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #d3cece;
+        }
+    </style>
+</head>
+
+<body onload="Redirect()">
+    <div class="bg">
+        <div class="card">
+            <span class="card__success">&#10004;</span>
+            <h1 class="card__msg">Payment Complete</h1>
+            <h2 class="card__submsg">Thank you for your transfer</h2>
+
+            <div class="card__body">
+                <p class="card__method">Payment Method</p>
+                <div class="card__payment">
+                    <img src="https://seeklogo.com/images/V/VISA-logo-F3440F512B-seeklogo.com.png" class="card__credit-card">
+                    <div class="card__card-details">
+                        <p class="card__card-type">Credit / Debit Card</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card__tags">
+                <span class="card__tag">Completed</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function Redirect() {
+            setTimeout(function() {
+                window.location.href = "{% url 'webuser:homepage' %}";
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

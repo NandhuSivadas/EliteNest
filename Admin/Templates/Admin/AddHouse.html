@@ -1,0 +1,80 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post"   enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 align="center">Add House</h2>
+        <table border="1" cellpadding="10" align="center">
+            <tr>
+                <td>House Title</td>
+                <td><input type="text" name="txt_title" id="" value="{{udata.house_title}}" required></td>
+            </tr>
+            <tr>
+                <td>House Description</td>
+                <td><input type="text" name="txt_description" id="" value="{{udata.house_description}}" required></td>
+            </tr>
+            <tr>
+                <td>House Price</td>
+                <td><input type="text" name="txt_price" id="" value="{{udata.house_price}}" required></td>
+            </tr>
+            <tr>
+                <td>House Image</td>
+                <td><input type="file" name="txt_image" id="" required></td>
+            </tr>
+            <tr>
+                <td>House Category</td>
+                <td><select name="select" id="">
+                    <option value="">..select..</option>
+                    {% for i in Data %}
+                    <option value="{{i.id}}">{{i.category_name}}</option>
+
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>House Location</td>
+                <td><input type="text" name="txt_location" id="" value="{{udata.house_location}}" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Add">  <input type="reset" value="Cancel"></td>
+               
+            </tr>
+        </table>
+       <br> <br> <br>
+        <table border="1" cellpadding="10" align="center">
+            <tr>
+                <td>SL No</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>Image</td>
+                <td>Category</td>
+                <td>Location</td>
+                <td>Action</td>
+            </tr>
+            {% for i in HouseData %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.house_title}}</td>
+                <td>{{i.house_description}}</td>
+                <td>{{i.house_price}}</td>
+                <td><img src="{{i.house_image.url}}" width="150" height="150"></td>
+                <td>{{i.house_category.category_name}}</td>
+                <td>{{i.house_location}}</td>
+                <td><a href="{% url 'webadmin:update_house' i.id %}">Update</a>||
+                    <a href="{% url 'webadmin:delete_house' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content  %}

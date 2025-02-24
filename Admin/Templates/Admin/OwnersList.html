@@ -1,0 +1,36 @@
+
+
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<table border="1" cellpadding="20">
+    <h2 align="center">Owners list</h2>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>House Title</th>
+            <th>House Description</th>
+            <th>House Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for owner in owners %}
+            <tr>
+                <td>{{ owner.name }}</td>
+                <td>{{ owner.contact }}</td>
+                <td>{{ owner.email }}</td>
+                <td>{{ owner.gender }}</td>
+                <td>{{ owner.address }}</td>
+                <td>{{ owner.house_title }}</td>
+                <td>{{ owner.house_description }}</td>
+                <td>{{ owner.house_price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

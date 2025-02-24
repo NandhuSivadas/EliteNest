@@ -1,0 +1,35 @@
+{% extends 'Owner/Header.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="card p-4 shadow-lg">
+        <h2 class="text-center">My Profile</h2>
+        <div class="text-center mb-3">
+            <img src="{{ user.owner_photo.url }}" class="rounded-circle" width="120" height="120" alt="Profile Picture">
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <td>{{ user.owner_name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.owner_email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.owner_contact }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ user.owner_address }}</td>
+            </tr>
+        </table>
+        <div class="text-center mt-3">
+            <a href="{% url 'webowner:editprofile' %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'webowner:changepassword' %}" class="btn btn-danger">Change Password</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post"> 
+         {% csrf_token %}
+         
+        
+         <table>
+            {% for i in Data %}
+          
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="txt_title" id="" value="{{i.house_title}}"></td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td><input type="text" name="txt_amount" id="" value="{{i.house_price}}"></td>
+            </tr>
+           
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Book"></td>
+                
+            </tr>
+           {% endfor %}
+         </table>
+    </form>
+</body>
+</html>

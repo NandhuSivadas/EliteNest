@@ -1,0 +1,88 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <style>
+        /* Style for the Payment link */
+        a.payment-link {
+            color: white;
+            background-color: #007bff;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a.payment-link:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for the Paid text */
+        span.paid-status {
+            color: green;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #e0ffe0;
+        }
+
+        /* Table styling */
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2 align="center">My Bookings</h2>
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>SL NO</th>
+                <th>Date</th>
+                <th>House</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+            {% for i in Data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.booking_date }}</td>
+                <td>{{ i.house.house_title }}</td>
+                <td>{{ i.booking_amount }}</td>
+                <td>
+                    {% if i.payment_status == '0' %}
+                    <a href="{% url 'webuser:paymentticket' i.id %}" class="payment-link">Payment</a>
+                    {% elif i.payment_status == '1' %}
+                    <span class="paid-status">Paid</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
+{% endblock content %}
