@@ -67,49 +67,89 @@ def review(request):
       return render(request,'User/Review.html')
 
 
+# def houselist(request):
+#     # Get IDs of houses that are booked and paid for
+#     booked_and_paid_houses = tbl_booking.objects.filter(
+#         booking_status='1', 
+#         payment_status='1'
+#     ).values_list('house_id', flat=True)
+
+#     # Get houses that are NOT booked and paid for
+#     available_houses = tbl_house.objects.exclude(id__in=booked_and_paid_houses)
+
+#     # Render the available houses to the template
+#     return render(request, 'User/HouseList.html', {'Data': available_houses})
+
+
+
+
+# def search_houses(request):
+#     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+#         price = request.GET.get('price')
+#         houses = tbl_house.objects.all()
+
+#         if price:
+#             houses = tbl_house.objects.filter(house_price=price)
+        
+#         house_data = list(houses.values(
+#             'house_title', 'house_description', 'house_location', 'house_price', 'house_image'
+#         ))
+
+#         # Construct full URL for image field
+#         for house in house_data:
+#             house['image_url'] = house['house_image']  # This should be the correct URL
+
+#         return JsonResponse({'houses': house_data})
+#     else:
+#         houses = tbl_house.objects.all()
+     
+#         context = {
+#             'Data': houses,
+            
+#         }
+#         return render(request, 'HouseList.html', context)
+
+
+
 def houselist(request):
-    # Get IDs of houses that are booked and paid for
+    
     booked_and_paid_houses = tbl_booking.objects.filter(
         booking_status='1', 
         payment_status='1'
     ).values_list('house_id', flat=True)
 
-    # Get houses that are NOT booked and paid for
+  
     available_houses = tbl_house.objects.exclude(id__in=booked_and_paid_houses)
 
-    # Render the available houses to the template
     return render(request, 'User/HouseList.html', {'Data': available_houses})
-
 
 
 
 def search_houses(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         price = request.GET.get('price')
+        location = request.GET.get('location')  # Get the location input
+
         houses = tbl_house.objects.all()
 
         if price:
-            houses = tbl_house.objects.filter(house_price=price)
+            houses = houses.filter(house_price__lte=price)  # Get houses within price range
         
+        if location:
+            houses = houses.filter(house_location__icontains=location)  # Case-insensitive search for location
+
         house_data = list(houses.values(
             'house_title', 'house_description', 'house_location', 'house_price', 'house_image'
         ))
 
         # Construct full URL for image field
         for house in house_data:
-            house['image_url'] = house['house_image']  # This should be the correct URL
+            house['image_url'] = house['house_image']  # This should be a valid image URL
 
         return JsonResponse({'houses': house_data})
     else:
         houses = tbl_house.objects.all()
-     
-        context = {
-            'Data': houses,
-            
-        }
-        return render(request, 'HouseList.html', context)
-
-
+        return render(request, 'User/HouseList.html', {'Data': houses})
 
 
 def booking(request, did):

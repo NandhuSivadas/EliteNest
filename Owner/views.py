@@ -68,7 +68,7 @@ def add_house(request):
             owner=owner  # Assign the owner correctly
         )
 
-        return redirect('add_houselist')  # Redirect after adding the house
+        return redirect('webowner:add_house')  # Redirect after adding the house
 
     return render(request, 'Owner/AddHouse.html', {'Data': Cdata})
 

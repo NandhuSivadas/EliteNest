@@ -10,7 +10,7 @@ def login(request):
         password=request.POST.get("txt_pass")
         usercount=tbl_user.objects.filter(user_email=email,user_password=password).count()
         admincount=tbl_admin.objects.filter(admin_email=email,admin_password=password).count()
-        ownercount=tbl_owner    .objects.filter(owner_email=email,owner_password=password).count()
+        ownercount=tbl_owner.objects.filter(owner_email=email,owner_password=password).count()
 
         
         if usercount > 0:
